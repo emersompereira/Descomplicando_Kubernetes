@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: pod-lesson
+  name: pod-lesson
+spec:
+  containers:
+  - image: nginx
+    name: nginx
+    volumeMounts:
+    - mountPath: /giropops
+      name: primeiro-emptydir
+    args: 
+    - sleep
+    - "600"
+    resources: 
+      Limits:
+        cpu: "0.5"
+        memory: "128Mi"
+      Requests:
+        cpu: "0.3"
+        memory: "64Mi"
+    resources: {}
+  dnsPolicy: ClusterFirst
+  restartPolicy: Always
+  volumes:
+  - name: primeiro-emptydir
+    emptyDir:
+      sizeLimit: 256Mi
+status: {}
